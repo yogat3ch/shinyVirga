@@ -37,7 +37,17 @@ and no values for multiple select lists.}
 \item{options}{List of options, see \link[shinyWidgets]{pickerOptions} for all available options.
 To limit the number of selection possible, see example below.}
 
-\item{choicesOpt}{Options for choices in the dropdown menu.}
+\item{choicesOpt}{A \code{list()} of options for individual choices in the dropdown menu,
+each element of the \code{list} should the same length as \code{choices}. You can use the following options :
+\itemize{
+\item \code{disabled}: logical vector indicating if the choice can be selected or not.
+\item \code{style}: CSS styles applied to the choice tag
+\item \code{class}: CSS class added to the choice tag
+\item \code{icon}: vector of icon names to display before choices (to use \code{icon("arrow-right")}, you have to use \code{fa-arrow-right} and \code{pickerOptions(iconBase = "fas")})
+\item \code{subtext} add a text after the choice
+\item \code{content}: replace entire choice with custom content (like raw HTML)
+\item \code{tokens}: add tokens associated with choices used in search results.
+}}
 
 \item{width}{The width of the input : 'auto', 'fit', '100px', '75\%'.}
 

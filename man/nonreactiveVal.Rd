@@ -20,3 +20,13 @@ these are useful in conjunction with \code{req} to evaluate whether a reactive s
 my_nrv <- nonreactiveVal(5)
 my_nrv()
 }
+\seealso{
+Other reactives: 
+\code{\link{get_userData}()},
+\code{\link{new_rv}()},
+\code{\link{rv}()},
+\code{\link{rv_index}()},
+\code{\link{rv_modify}()},
+\code{\link{rv_to_list}()}
+}
+\concept{reactives}

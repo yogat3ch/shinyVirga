@@ -18,3 +18,13 @@ Create a \code{\link[shiny]{reactiveVal}} or a \code{nonreactiveVal} depending o
 \examples{
 new_rv(0)
 }
+\seealso{
+Other reactives: 
+\code{\link{get_userData}()},
+\code{\link{nonreactiveVal}()},
+\code{\link{rv}()},
+\code{\link{rv_index}()},
+\code{\link{rv_modify}()},
+\code{\link{rv_to_list}()}
+}
+\concept{reactives}

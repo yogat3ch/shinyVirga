@@ -43,7 +43,11 @@ isolate(values$a)
 }
 \seealso{
 Other reactives: 
+\code{\link{get_userData}()},
+\code{\link{new_rv}()},
+\code{\link{nonreactiveVal}()},
 \code{\link{rv_index}()},
+\code{\link{rv_modify}()},
 \code{\link{rv_to_list}()}
 }
 \concept{reactives}
