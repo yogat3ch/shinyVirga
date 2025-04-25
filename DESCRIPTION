@@ -49,12 +49,12 @@ Suggests:
     dockerfiler (>= 0.2.0),
     functionMap,
 	  googlesheets4
-Remotes:  
+Remotes: 
     MangoTheCat/functionMap,
     yogat3ch/bs4Dash,
     yogat3ch/UU,
     JohnCoene/tippy
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 URL: https://martin-mccoy.github.io/shinyVirga/

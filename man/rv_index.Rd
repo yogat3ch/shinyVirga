@@ -19,7 +19,11 @@ Index into a reactiveValues object and return a list
 }
 \seealso{
 Other reactives: 
-\code{\link{rv_to_list}()},
-\code{\link{rv}()}
+\code{\link{get_userData}()},
+\code{\link{new_rv}()},
+\code{\link{nonreactiveVal}()},
+\code{\link{rv}()},
+\code{\link{rv_modify}()},
+\code{\link{rv_to_list}()}
 }
 \concept{reactives}

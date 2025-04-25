@@ -34,7 +34,11 @@ isolate(reactiveValuesToList(values))
 }
 \seealso{
 Other reactives: 
+\code{\link{get_userData}()},
+\code{\link{new_rv}()},
+\code{\link{nonreactiveVal}()},
+\code{\link{rv}()},
 \code{\link{rv_index}()},
-\code{\link{rv}()}
+\code{\link{rv_modify}()}
 }
 \concept{reactives}

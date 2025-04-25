@@ -9,7 +9,7 @@ rv <- function(...) {
 #' Create a \code{\link[shiny]{reactiveVal}} or a `nonreactiveVal` depending on whether shiny is running
 #'
 #' @param val \code{obj} any initial value
-#'
+#' @family reactives
 #' @return \code{reactiveVal/nonreactiveVal}
 #' @export
 #'
@@ -43,7 +43,7 @@ rv_index <- function(x, indices, ...) {
 #' @param modify_in_place \code{lgl} modifies the reactiveValues object in place, making it such that assignment is not necessary. If `FALSE`, the default, a list copy of the reactiveValues are made and returned. Useful for checking expected output.
 #' @return \code{none} Modifies in place, unless `modify_in_place = FALSE`
 #' @export
-#'
+#' @family reactives
 
 rv_modify <- function(x, ..., modify_in_place = TRUE, e = rlang::caller_env()) {
 
@@ -100,7 +100,7 @@ rvtl <- rv_to_list
 #'
 #' @return \code{obj} Whatever object was last stored
 #' @export
-#'
+#' @family reactives
 #' @examples
 #' my_nrv <- nonreactiveVal(5)
 #' my_nrv()
@@ -123,3 +123,26 @@ nonreactiveVal <- function(value = NULL) {
   out
 }
 nrV <- nonreactiveVal
+
+
+#' Retreive a value from the shiny session userData environment
+#'
+#' @param x \code{chr} The name of the object to retrieve
+#' @inheritParams shiny::updateActionButton
+#'
+#' @returns the object
+#' @export
+#' @family reactives
+#' @examples
+#' \notrun{
+#'  # Must run inside a shiny app
+#'  session$userData$myData <- c(1,2,3)
+#'  print(get_userData("myData"))
+#' }
+get_userData <- function(x, session = shiny::getDefaultReactiveDomain()) {
+  stopifnot(`get_userData: not a shiny session` = !is.null(session))
+  out <- session$userData[[x]]
+  if (is.null(out))
+    UU::gwarn("{x} not found in userData")
+  return(out)
+}
