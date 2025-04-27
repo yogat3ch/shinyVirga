@@ -1,7 +1,31 @@
 #' Add a temporary message after an element
 #' Message is added directly below element and persists for three seconds
 #' @param id \code{(chr)} Automatically namespaced with `ns` if inside a module
-#' @param content \code{chr/shiny.tag/shiny.tag.list} Content to add beneath the element
+#' @param status \code{chr} Bootstrap status to give to the element. One of:
+#'\itemize{
+#'   \item{\code{success}}{ Green}
+#'   \item{\code{info}}{ Blue}
+#'   \item{\code{warning}}{ Yellow}
+#'   \item{\code{danger}}{ Red}
+#'   \item{\code{primary}}{ Blue}
+#'   \item{\code{secondary}}{ Grey}
+#'   \item{\code{light}}{ Light}
+#'   \item{\code{dark}}{ Dark}
+#'}
+#' Prefixed by one of the following (This is a complete list which depends on the version of Bootstrap you're using):
+#' \itemize{
+#'   \item \code{btn-}: Used for styling buttons (e.g., \code{btn-primary}). Includes filled buttons.
+#'   \item \code{btn-outline-}: Used for styling outline buttons (e.g., \code{btn-outline-success}).
+#'   \item \code{alert-}: Used for styling alert messages (e.g., \code{alert-danger}).
+#'   \item \code{text-}: Used as a utility to set text color (e.g., \code{text-warning}).
+#'   \item \code{bg-}: Used as a utility to set background color (e.g., \code{bg-info}).
+#'   \item \code{border-}: Used as a utility to set border color (e.g., \code{border-secondary}).
+#'   \item \code{table-}: Used for contextual coloring of table rows or cells (e.g., \code{<tr class="table-light">}).
+#'   \item \code{link-}: Used as helpers to style link colors (e.g., \code{link-dark}).
+#'   \item \code{list-group-item-}: Used for contextual coloring of list group items, often with \code{list-group-item-action} (e.g., \code{<a href="#" class="list-group-item list-group-item-action list-group-item-primary">}).
+#'   \item \code{text-bg-}: A utility combining text and background color (e.g., \code{text-bg-danger} sets a danger background with appropriate contrasting text color). Often used with badges or other elements.
+#' }
+#' @param content \code{chr/shiny.tag/shiny.tag.list} Content to show relative to the element
 #' @param properties \code{list} of css rules to apply to the parent element of the content. Defaults to jQuery validation styled messages.
 #' @param delay \code{dbl} duration in ms before removing the content from the element. Set to 0 to allow the element to persist.
 #' @inheritParams shinyjs::html
@@ -17,29 +41,34 @@ js_after <- function(id,
                      properties = list(`font-size` = "12px",
                                        display = "block",
                                        position = "relative"),
+                     position = "bottom",
                      delay = 3000,
                      asis = FALSE,
                      .ns = ns_find()) {
   if (!asis)
     id <- .ns(id)
   to_append <- tags$span(
-    class = if (!is.null(status))
-      paste0("text-", status),
+    class = status,
     class = 'js-after',
     style = css_props(declarations = properties),
     content
   )
-  html <- htmltools::doRenderTags(to_append)
+  html <- htmltools::HTML(htmltools::doRenderTags(to_append))
+
+  # the_js <- UU::glue_js("
+  #   $('*{make_id(id)}*').after(() => {
+  #     return `*{htmltools::HTML(html)}*`
+  #   })
+  #   ")
   the_js <- UU::glue_js("
-    $('*{make_id(id)}*').after(() => {
-      return `*{htmltools::HTML(html)}*`
-    })
-    ")
+    displayElementRelative('*{id}*', '*{position}*', `*{html}*`, *{delay}*)
+                        ")
   shinyjs::runjs(the_js)
-  if (delay)
-    shinyjs::delay(delay, shinyjs::hide(selector = '.js-after', asis = TRUE))
 
 }
+
+
+
 #' Add driver.js dependency
 #' @family JS
 #' @export
