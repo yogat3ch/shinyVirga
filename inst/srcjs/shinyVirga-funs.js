@@ -86,7 +86,6 @@ function displayElementRelative(id, position, content, duration) {
     return;
   }
 
-  debugger;
   const relativeElement = document.createElement("div");
   relativeElement.innerHTML = content;
   relativeElement.style.position = "absolute"; // Crucial for positioning relative to viewport or positioned ancestor
